@@ -9,13 +9,19 @@ async function handleData(event) {
     event.preventDefault();
 
     var avenger = await getHeroes();
-    displayAvenger(avenger);
+
 
 }
 
 async function getHeroes(event) {
-    var heroes = await fetch('superheroes.php');
-    return heroes.text()
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            alert(this.responseText);
+        }
+    };
+    xhttp.open("GET", "superheroes.php", true);
+    xhttp.send();
 }
 
 function displayAvenger(avenger) {
